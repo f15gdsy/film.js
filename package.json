@@ -1,0 +1,20 @@
+{
+  "name": "film.js",
+  "version": "0.1.0",
+  "description": "A lightweight, modern, dependency-free library for creating endless 'film player' animation",
+  "main": "dist/film.min.js",
+  "license": "MIT",
+  "author": {
+    "name": "Wu Yifeng",
+    "email": "f15gdsy@gmail.com"
+  },
+  "scripts": {
+    "dev": "webpack -w"
+  },
+  "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.4.0",
+    "babel-preset-env": "^1.2.1",
+    "webpack": "^2.2.1"
+  }
+}
