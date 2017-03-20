@@ -11,6 +11,7 @@
   "scripts": {
     "test-w": "ava test/unit -w -v --no-power-assert --fail-fast",
     "test:unit": "nyc ava test/unit && nyc report --reporter=lcov > build/coverage.lcov",
+    "test": "npm run test:unit",
     "dev": "webpack -w --config build/webpack.config.js"
   },
   "devDependencies": {
