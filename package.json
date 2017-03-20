@@ -9,12 +9,27 @@
     "email": "f15gdsy@gmail.com"
   },
   "scripts": {
-    "dev": "webpack -w"
+    "test-w": "ava test/unit -w -v --no-power-assert --fail-fast",
+    "test:unit": "nyc ava test/unit && nyc report --reporter=lcov > build/coverage.lcov",
+    "dev": "webpack -w --config build/webpack.config.js"
   },
   "devDependencies": {
+    "ava": "^0.18.2",
     "babel-core": "^6.23.1",
     "babel-loader": "^6.4.0",
     "babel-preset-env": "^1.2.1",
+    "babel-register": "^6.24.0",
+    "browser-env": "^2.0.25",
+    "nyc": "^10.1.2",
     "webpack": "^2.2.1"
+  },
+  "dependencies": {
+    "simple-assign": "^0.1.0"
+  },
+  "ava": {
+    "require": [
+      "babel-register",
+      "./test/unit/_setup-browser-env.js"
+    ]
   }
 }

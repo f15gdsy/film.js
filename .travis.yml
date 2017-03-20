@@ -1,0 +1,7 @@
+language: node_js
+node_js:
+  - "6.7"
+cache: node_modules
+install: npm install --registry=https://registry.npmjs.org/
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

@@ -1,11 +1,12 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: path.resolve(__dirname, '../src/index.js'),
 
   output: {
     filename: 'film.min.js',
-    path: path.join(__dirname, 'dist'),
+    path: path.resolve(__dirname, '../dist'),
     library: 'Film',
     libraryTarget: 'umd'
   },
@@ -16,5 +17,9 @@ module.exports = {
       exclude: /node_modules/,
       loader: 'babel-loader'
     }]
-  }
+  },
+
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin()
+  ]
 };
