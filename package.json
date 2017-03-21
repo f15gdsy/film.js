@@ -12,7 +12,7 @@
     "test-w": "ava test/unit -w -v --no-power-assert --fail-fast",
     "test:unit": "nyc ava test/unit && nyc report --reporter=lcov > build/coverage.lcov",
     "test": "npm run test:unit",
-    "dev": "webpack -w --config build/webpack.config.js"
+    "dev": "rollup -w --config build/rollup.config.js"
   },
   "devDependencies": {
     "ava": "^0.18.2",
@@ -22,7 +22,12 @@
     "babel-register": "^6.24.0",
     "browser-env": "^2.0.25",
     "nyc": "^10.1.2",
-    "webpack": "^2.2.1"
+    "rollup": "^0.41.6",
+    "rollup-plugin-buble": "^0.15.0",
+    "rollup-plugin-commonjs": "^8.0.2",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-plugin-uglify": "^1.0.1",
+    "rollup-watch": "^3.2.2"
   },
   "dependencies": {
     "simple-assign": "^0.1.0"

@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const WebpackShellPlugin = require('webpack-shell-plugin')
 
 module.exports = {
   entry: path.resolve(__dirname, '../src/index.js'),
@@ -20,6 +21,9 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.optimize.UglifyJsPlugin()
+    new webpack.optimize.UglifyJsPlugin(),
+    new WebpackShellPlugin({
+      onBuildEnd: ['cp dist/film.min.js docs/film.min.js']
+    })
   ]
 };

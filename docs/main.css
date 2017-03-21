@@ -1,0 +1,89 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: didot, Baskerville, Bodoni, Georgia, serif;
+}
+
+body {
+  background-color: black;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.wrapper {
+  position: relative;
+}
+
+.wrapper__films {
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
+
+.wrapper__main {
+  background-color: rgba(0, 0, 0, .75);
+  height: 100vh;
+  width: 100%;
+}
+
+
+.main {
+  color: rgb(230, 230, 230);
+  left: 50%;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.main__title {
+  font-size: 64px;
+}
+
+.main__desc {
+  font-size: 20px;
+  margin-top: 20px;
+  width: 500px;
+}
+
+.main__link {
+  color: inherit;
+  display: block;
+  margin-top: 20px;
+  opacity: 1;
+  text-decoration: none;
+  transition: opacity .25s;
+}
+.main__link:hover {
+  opacity: .5;
+}
+
+.main__icon-github {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  margin-left: 10px;
+  vertical-align: bottom;
+  width: 30px;
+}
+
+
+
+.film {
+  height: 280px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.film__frame {
+  background-position: center;
+  background-size: cover;
+  border: solid 10px black;
+  height: 280px;
+  overflow: hidden;
+  width: 180px;
+}

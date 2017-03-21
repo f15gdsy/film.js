@@ -3,7 +3,8 @@ import assign from 'simple-assign'
 const DEFAULT_OPTS = {
   frameWidth: null,
   framesPerView: 3,
-  speed: 20
+  speed: 20,
+  direction: 'left'
 }
 
 const raf = window.requestAnimationFrame
@@ -63,24 +64,28 @@ export default class Film {
 
     frame.style.position = 'absolute'
     frame.style.transform = `translateX(${ frame.moveVal }px)`
-    frame.style.height = '100%'
     frame.style['z-index'] = i
   }
 
   _update() {
     const mutates = []
     const speed = this.opts.speed / 16
+    let updateFunc;
+
+    switch (this.opts.direction) {
+      case 'left':
+        updateFunc = (...args) => this._updateLeft(...args)
+        break
+      case 'right':
+        updateFunc = (...args) => this._updateRight(...args)
+        break
+      default:
+        throw new Error('Film.js: invalid direction')
+    }
 
     // batch dom reads
     this.frames.forEach((frame, i) => {
-      frame.moveVal -= speed
-
-      /* istanbul ignore else */
-      if (frame.moveVal + frame.clientWidth < 0) {
-        const lastFrameIndex = i === 0 ? i = this.frames.length - 1 : i - 1
-        const lastFrame = this.frames[lastFrameIndex]
-        frame.moveVal = Math.floor(lastFrame.moveVal + lastFrame.clientWidth - speed - 1)
-      }
+      updateFunc(frame, i, speed)
 
       mutates.push(() => {
         frame.style.transform = `translateX(${ frame.moveVal }px)`
@@ -91,6 +96,27 @@ export default class Film {
     mutates.forEach(mutate => mutate())
 
     this.reqId = raf(() => this._update())
+  }
+
+  _updateLeft(frame, i, speed) {
+    frame.moveVal -= speed
+
+    /* istanbul ignore else */
+    if (frame.moveVal + frame.clientWidth < -10) {
+      const lastFrameIndex = i === 0 ? i = this.frames.length - 1 : i - 1
+      const lastFrame = this.frames[lastFrameIndex]
+      frame.moveVal = Math.floor(lastFrame.moveVal + lastFrame.clientWidth - speed - 1)
+    }
+  }
+
+  _updateRight(frame, i, speed) {
+    frame.moveVal += speed
+
+    if (frame.moveVal - window.innerWidth > 10) {
+      const firstFrameIndex = i === this.frames.length - 1 ? 0 : i + 1
+      const firstFrame = this.frames[firstFrameIndex]
+      frame.moveVal = Math.floor(firstFrame.moveVal - firstFrame.clientWidth + speed + 1)
+    }
   }
 
   start() {

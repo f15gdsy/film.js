@@ -79,7 +79,6 @@ test.serial('new Film(el) setups all the .film__frame in el as frames', t => {
   frames.forEach((frame, i) => {
     t.is(frame.style.position, 'absolute')
     t.regex(frame.style.transform, /translateX\(\d+(.\d+)?px\)/)
-    t.is(frame.style.height, '100%')
     t.is(frame.style['z-index'], `${ i }`)
   })
 })
@@ -183,4 +182,40 @@ test.serial('{ speed: Number } sets the speed of frames movement', t => {
   t.context.film = film
 
   t.is(film.opts.speed, speed)
+})
+
+test.serial('{ direction: String } accepts "left" or "right" as direction', t => {
+  let direction = 'left'
+  const film = new Film('.film', {
+    direction
+  })
+  t.context.film = film
+
+  t.is(film.opts.direction, direction)
+
+  t.notThrows(() => {
+    film._update()
+  })
+
+  direction = 'right'
+
+  film.opts.direction = direction
+  film.refresh()
+
+  t.is(film.opts.direction, direction)
+
+  t.notThrows(() => {
+    film._update()
+  })
+})
+
+test.serial('{ direction: String } raise error when direction is invalid', t => {
+  let direction = 'invalid'
+  const film = new Film('.film', {
+    direction
+  })
+
+  t.throws(() => {
+    film._update()
+  }, Error, 'Film.js: invalid direction')
 })
