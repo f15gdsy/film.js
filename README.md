@@ -8,12 +8,12 @@ Check out the demo here: https://f15gdsy.github.io/film.js/
 ## 1. Installation
 If you are using npm:
 ```
-npm install vue-insert-compo --save
+npm install film.js --save
 ```
 
 If you are using yarn:
 ```
-yarn add vue-insert-compo
+yarn add film.js
 ```
 
 
